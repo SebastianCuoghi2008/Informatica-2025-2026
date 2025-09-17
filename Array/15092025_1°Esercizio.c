@@ -27,11 +27,12 @@ void StampaMatrice(int (*_matrice)[]){
 void ScambioMatrice(int (*_matrice)[N]){
     int temp;
 
-    for(int i=0; i<N; i++){
-        temp=_matrice[i][j];
+    for(int i=0;i<N; i++){
+        temp=_matrice[i][i];
+        _matrice[i][i]=_matrice[i][N-i-1];
+        _matrice[i][N-i-1]=temp;
     }
 }
-
 
 int main(){
     srand(time(NULL));
