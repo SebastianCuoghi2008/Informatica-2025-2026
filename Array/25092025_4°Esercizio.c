@@ -15,7 +15,7 @@ int* CreaVettore(int _N){
 
     if(_vettore==NULL){
         printf("Errore di allocazione!\n");
-        return 0;
+        return 1;
     }
     return _vettore;
 }
