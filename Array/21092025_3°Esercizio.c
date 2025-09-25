@@ -15,8 +15,7 @@ Il programma deve permettere, tramite menù:
 int main(){
     int *numeri=NULL;  //array dinamico
     int dimensione=0;  //quanti elementi ci sono
-    int scelta, N, i;
-    int trovato=0;
+    int scelta, N, i, j, trovato;
 
     do{
         printf("\nscegli tramite menù: \n");
@@ -30,6 +29,7 @@ int main(){
 
         switch(scelta){
             case 1:{
+                // Aggiungi
                 printf("numero da inserire: ");
                 scanf("%d", &N);
                 numeri=(int*)realloc(numeri, (dimensione+1)*sizeof(int));
@@ -43,6 +43,7 @@ int main(){
             }
             break;
             case 2:{
+                // Visualizza
                 printf("contenuto dell'array: ");
                 if(dimensione==0){
                     printf("array vuoto");
@@ -55,6 +56,7 @@ int main(){
             }
             break;
             case 3:{
+                // Cerca
                 printf("numero da cercare: ");
                 scanf("%d", &N);
                 for(i=0; i<dimensione; i++){
@@ -69,11 +71,26 @@ int main(){
             }
             break;
             case 4:{
-
+                // Ordina (bubble sort)
+                for (i = 0; i < dimensione - 1; i++) {
+                    for (j = 0; j < dimensione - i - 1; j++) {
+                        if (numeri[j] > numeri[j+1]) {
+                            int tmp = numeri[j];
+                            numeri[j] = numeri[j+1];
+                            numeri[j+1] = tmp;
+                        }
+                    }
+                }
+                // Visualizza
+                printf("Numeri ordinati:\n");
+                for (i = 0; i < dimensione; i++){
+            	    printf("%d ", numeri[i]);
+			    }
+                printf("\n");
             }
             break;
             case 5:{
-
+                
             }
             break;
             case 6:{
