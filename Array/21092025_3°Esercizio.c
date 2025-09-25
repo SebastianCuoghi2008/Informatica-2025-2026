@@ -81,7 +81,7 @@ int main(){
                         }
                     }
                 }
-                // Visualizza
+                // Visualizza L'array ordinato
                 printf("Numeri ordinati:\n");
                 for (i = 0; i < dimensione; i++){
             	    printf("%d ", numeri[i]);
@@ -90,11 +90,25 @@ int main(){
             }
             break;
             case 5:{
-                
-            }
-            break;
-            case 6:{
-
+                // Elimina
+                printf("Numero da eliminare: ");
+                scanf("%d", &N);
+                trovato = -1;
+                for (i = 0; i < dimensione; i++) {
+                    if (numeri[i] == N) {
+                        trovato = i;
+                    }
+                }
+                if (trovato != -1) {
+                    for (i = trovato; i < dimensione - 1; i++){  //sposta gli elementi da destra a sinistra
+                        numeri[i] = numeri[i+1];
+                    }
+                    dimensione--;
+                    numeri = realloc(numeri, dimensione * sizeof(int));
+                    printf("Numero eliminato.\n");
+                }else {
+                    printf("Numero non trovato.\n");
+                }
             }
             break;
             default:
@@ -102,4 +116,8 @@ int main(){
             break;
         }
     }while(scelta!=6);
+
+    free(numeri);
+    printf("Programma terminato.\n");
+    return 0;
 }
