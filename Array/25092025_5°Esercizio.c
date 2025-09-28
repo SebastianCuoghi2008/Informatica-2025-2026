@@ -11,8 +11,8 @@
 
 int main(){
     int *vettore=NULL;
-    int N=0;
-    int scelta;
+    int dimensione=0;
+    int scelta, N;
 
     do{
         printf("\n--- MENU ---\n");
@@ -26,23 +26,41 @@ int main(){
         switch(scelta){
             case 1:
 
-            
             break;
             case 2:
-
-            
+                for(int i=0; i<N; i++){
+                    printf("inserisci il valore: ");
+                    scanf("%d", &vettore[i]);
+                }
             break;
             case 3:
-
-            
+                for(int i=0; i<N; i++){
+                    printf("%d", vettore[i]);
+                }
+                printf("\n");
             break;
             case 4:
 
             
             break;
             case 5:
+                printf("vettore da inserire: ");
+                scanf("%d", &N);
+                vettore=(int*)realloc(vettore, (dimensione+1)*sizeof(int));
+                if(vettore==NULL){
+                    printf("errore du allocazione\n");
+                    return 1;
+                }
+                vettore[dimensione]=N;
+                dimensione++;
+                printf("numero aggiunto\n");
 
-            
+                if(*vettore% 2 == 0){
+                    printf("il numero è pari");
+                }
+                else{
+                    printf("%d, il numero è dispari", *vettore);
+                }
             break;
             default:
                 printf("scelta non autorizzata");
