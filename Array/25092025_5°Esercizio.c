@@ -9,65 +9,76 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int* CreaVettore(int _N){
+    int *_vettore=NULL;
+
+    _vettore=(int*)malloc(_N *sizeof(int));
+
+    if(_vettore==NULL){
+        printf("Errore di allocazione!\n");
+        return NULL;
+    }
+    return _vettore;
+}
+
+int* InserisciValori(int *_vettore, int _N){
+
+    for(int i=0; i<_N; i++){
+        printf("inserisci l'elemento: ");
+        scanf("%d", &_vettore[i]);
+    }
+    return _vettore;
+}
+
+void StampaVettore(int *_vettore, int _N){
+    
+    printf("hai inserito i seguenti elementi: ");
+    for(int i=0; i<_N; i++){
+        printf("%d\t", _vettore[i]);
+    }
+    printf("\n");
+}
+
+int CalcolaSomma(int *_vettore, int _N){
+    int somma=0;
+    
+    for(int i=0; i<_N; i++){
+        if(_vettore[i]%3==0){
+            somma+=_vettore[i];
+        }
+    }
+    return somma;
+}
+
+int *EstraDispari(int *_vettore, int _N, int *_DimDispari){
+    int *_dispari=NULL;
+    *_DimDispari=0;
+
+    for(int i=0; i<_N; i++){
+        if(_vettore[i]%2!=0){
+            (*_DimDispari)++;
+            int *temp = realloc(_dispari, (*_DimDispari)*sizeof(int));
+        }
+    }
+}
+
 int main(){
-    int *vettore=NULL;
-    int dimensione=0;
-    int scelta, N;
+    int *vettore=NULL;  //puntatore al vettore
+    int *dispari=NULL;
+    int N, DimDispari;
 
     do{
-        printf("\n--- MENU ---\n");
-        printf("Allocare un array iniziale di numeri\n");
-        printf("Inserimento dei valori\n");
-        printf("Stampa array\n");
-        printf("Calcoli la somma degli elementi multipli di 3\n");
-        printf("Creare un nuovo array contenente solo valori dispari\n");
-        scanf("%d", &scelta);
+        printf("inserisci la quantità degli elementi: ");
+        scanf("%d", &N);
+    }while(N<0);
 
-        switch(scelta){
-            case 1:
+    vettore = CreaVettore(N);
+    vettore = InserisciValori(vettore, N);
+    StampaVettore(vettore, N);
 
-            break;
-            case 2:
-                for(int i=0; i<N; i++){
-                    printf("inserisci il valore: ");
-                    scanf("%d", &vettore[i]);
-                }
-            break;
-            case 3:
-                for(int i=0; i<N; i++){
-                    printf("%d", vettore[i]);
-                }
-                printf("\n");
-            break;
-            case 4:
+    printf("la somma degli elementi divisibili per 3 vale: %d\n", CalcolaSomma(vettore, N));
+    //creiamo l'array contenente i valori dispari tramite la realloc 
+    dispari= EstraDispari(int *_vettore, int _N, int *_DimDispari){
 
-            
-            break;
-            case 5:
-                printf("vettore da inserire: ");
-                scanf("%d", &N);
-                vettore=(int*)realloc(vettore, (dimensione+1)*sizeof(int));
-                if(vettore==NULL){
-                    printf("errore du allocazione\n");
-                    return 1;
-                }
-                vettore[dimensione]=N;
-                dimensione++;
-                printf("numero aggiunto\n");
-
-                if(*vettore% 2 == 0){
-                    printf("il numero è pari");
-                }
-                else{
-                    printf("%d, il numero è dispari", *vettore);
-                }
-            break;
-            default:
-                printf("scelta non autorizzata");
-            break;
-        }
-    }while(scelta!=5);
-
-    vettore = (int*)malloc(N * sizeof(int));
-    vettore = (int*)realloc(vettore, (N+1)*sizeof(int));
+    }
 }
