@@ -15,10 +15,11 @@ int* CreaVettore(int _N){
 
     if(_vettore==NULL){
         printf("Errore di allocazione!\n");
-        return 1;
+        return NULL;
     }
     return _vettore;
 }
+
 int* InserisciValori(int *_vettore, int _N){
 
     for(int i=0; i<_N; i++){
