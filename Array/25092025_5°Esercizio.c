@@ -87,6 +87,8 @@ int main(){
     printf("la somma degli elementi divisibili per 3 vale: %d\n", CalcolaSomma(vettore, N));
     //creiamo l'array contenente i valori dispari tramite la realloc 
     dispari= EstraiDispari(vettore,  N, &DimDispari); 
+    printf("L'array contenente gli elementi dispari risulta: ");
+    StampaVettore(dispari, DimDispari);
     free(vettore);
     free(dispari);
 }
