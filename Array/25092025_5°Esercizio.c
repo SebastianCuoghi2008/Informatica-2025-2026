@@ -50,7 +50,7 @@ int CalcolaSomma(int *_vettore, int _N){
     return somma;
 }
 
-int *EstraDispari(int *_vettore, int _N, int *_DimDispari){
+int *EstraiDispari(int *_vettore, int _N, int *_DimDispari){
     int *_dispari=NULL;
     *_DimDispari=0;
 
@@ -58,8 +58,16 @@ int *EstraDispari(int *_vettore, int _N, int *_DimDispari){
         if(_vettore[i]%2!=0){
             (*_DimDispari)++;
             int *temp = realloc(_dispari, (*_DimDispari)*sizeof(int));
+            if(temp==NULL){
+                printf("Errore di allocazione!\n");
+                free(_dispari);
+                return NULL;
+            }
+            _dispari=temp;
+            _dispari[(*_DimDispari)-1] = _vettore [i];
         }
     }
+    return _dispari;
 }
 
 int main(){
@@ -78,7 +86,7 @@ int main(){
 
     printf("la somma degli elementi divisibili per 3 vale: %d\n", CalcolaSomma(vettore, N));
     //creiamo l'array contenente i valori dispari tramite la realloc 
-    dispari= EstraDispari(int *_vettore, int _N, int *_DimDispari){
-
-    }
+    dispari= EstraiDispari(vettore,  N, &DimDispari); 
+    free(vettore);
+    free(dispari);
 }
