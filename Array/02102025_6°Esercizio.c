@@ -11,15 +11,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int* InserisciValori(int *_vettore, int _N){
-
-    for(int i=0; i<_N; i++){
-        printf("inserisci l'elemento: ");
-        scanf("%d", &_vettore[i]);
-    }
-    return _vettore;
-}
-
 int* CreaVettore(int _N){
     int *_vettore=NULL;
 
@@ -28,6 +19,15 @@ int* CreaVettore(int _N){
     if(_vettore==NULL){
         printf("Errore di allocazione!\n");
         return NULL;
+    }
+    return _vettore;
+}
+
+int* InserisciValori(int *_vettore, int _N){
+
+    for(int i=0; i<_N; i++){
+        printf("inserisci l'elemento: ");
+        scanf("%d", &_vettore[i]);
     }
     return _vettore;
 }
@@ -41,40 +41,36 @@ void StampaVettore(int *_vettore, int _N){
     printf("\n");
 }
 
-int main(){
-    int *vettore = NULL; 
-    int *numeri = NULL;   // array dinamico
-    int dimensione = 0;    // quanti elementi ci sono
-    int scelta, N, i, j, trovato;
+int* AumentaDim(int *_vettore, int _N){
+    int NuovoDim=0;
+    int *aumenta = NULL;
 
     do{
-        scanf("%d", &scelta);
 
-        if (scelta == 1){
-            vettore = CreaVettore(N);
-        }
-        else if (scelta == 2){
-            vettore = InserisciValori(vettore, N);
-        }
-        else if (scelta == 3){
-            printf("Inserisci un numero: ");
-            scanf("%d", &N);
-            numeri =(int *)realloc(numeri, (dimensione + 1) * sizeof(int));
-            if (numeri == NULL) {
-                printf("Errore di allocazione!\n");
-                return 1;
-            }
-            numeri[dimensione] = N;
-            dimensione++;
-            printf("Numero aggiunto!\n");
-        }
-        else if (scelta == 4){
-            StampaVettore(vettore, N);
-        }
-    }while (scelta != 5);
+    }
+}
+
+
+int main(){
+    int *vettore = NULL;  //puntatore al vettore 
+    int N;    
+    int scelta=0;
+
+    do{
+        printf("inserisci la quantità degli elementi: ");
+        scanf("%d", &N);
+    }while(N<0);
 
     vettore = CreaVettore(N);
     vettore = InserisciValori(vettore, N);
+    StampaVettore(vettore, N);
+
+    printf("vuoi aumentare la dimensione? se vuoi aumentarla, inserisci 1 altrimenti 0: ");
+    scanf("%d", &scelta);
+
+    if(scelta==1){
+        vettore = AumentaDim(N, vettore);
+    }
     StampaVettore(vettore, N);
 
     free(vettore);
