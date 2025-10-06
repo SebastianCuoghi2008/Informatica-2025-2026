@@ -43,10 +43,12 @@ void StampaVettore(int *_vettore, int _N){
 
 int* AumentaDim(int *_vettore, int _N){
     int NuovoDim=0;
-    int *aumenta = NULL;
+    int *Aumenta = NULL;
 
     do{
-
+        printf()
+        scanf()
+        int *Aumenta = realloc(_dispari, (*_AumentaDim)*sizeof(int));
     }
 }
 
