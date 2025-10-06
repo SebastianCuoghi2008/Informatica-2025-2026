@@ -72,4 +72,10 @@ int main(){
             StampaVettore(vettore, N);
         }
     }while (scelta != 5);
+
+    vettore = CreaVettore(N);
+    vettore = InserisciValori(vettore, N);
+    StampaVettore(vettore, N);
+
+    free(vettore);
 }
