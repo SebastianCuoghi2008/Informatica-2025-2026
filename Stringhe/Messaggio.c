@@ -9,14 +9,14 @@ typedef char* String;
 int main(){
     String frase = NULL;
     int cnt = 0;
-    int capacita = 0;
+    int capacità = 0;
     char c;
     c = getchar();
 
     while(c != '\n') {
-        if(cnt + 1 > capacita){
-            capacita += 10;
-            frase = (String) realloc(frase, capacita * sizeof(char));
+        if(cnt + 1 > capacità){
+            capacità += 10;
+            frase = (String) realloc(frase, capacità * sizeof(char));
             if(frase == NULL){
                 printf("Ahia ahia :(");
                 return 1;
