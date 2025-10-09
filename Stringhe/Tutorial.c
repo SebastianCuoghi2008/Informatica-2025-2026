@@ -5,7 +5,7 @@ typedef char* Stringa;
 
 int main() {
     Stringa str = NULL;
-    int Dimensione = 0;     // lunghezza corrente
+    int Dimensione = 0;   // lunghezza corrente
     int Capacità = 0;   // spazio allocato
     char c;
 
