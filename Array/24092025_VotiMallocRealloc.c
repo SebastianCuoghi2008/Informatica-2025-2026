@@ -5,28 +5,28 @@
 
 int main(){
     float *voti = NULL;
-    int num = 0;
+    int Numero = 0;
     
-    printf("quanti voti vuoi aggiungere?");
-    scanf("%d", &num);
-    voti = (float*) malloc(num * sizeof(float));
+    printf("quanti voti vuoi aggiungere? ");
+    scanf("%d", &Numero);
+    voti = (float*) malloc(Numero * sizeof(float));
     
     if(voti == NULL){
-        printf("errore di allocazione memoria!!!!!!! :((()");
+        printf("Errore di allocazione memoria!!!!!!! :(((");
         return 1;
     }
-    for(int i = 0; i < num; i++){
-        printf("Inserisci il voto %d", i+1);
+    for(int i = 0; i < Numero; i++){
+        printf("Inserisci il voto %d: ", i+1);
         scanf("%f", &voti[i]);
     }
-    voti = (float*)realloc(voti, (num+1)*sizeof(float));
+    voti = (float*)realloc(voti, (Numero+1)*sizeof(float));
     if(voti == NULL){
-        printf("errore di allocazione memoria!!!!!!! :((()");
+        printf("Errore di allocazione memoria!!!!!!! :(((");
         return 1;
     }
-    num++;
-    printf("Inserisci il voto %d", num);
-    scanf("%f", &voti[num-1]);
+    Numero++;
+    printf("Inserisci il voto %d: ", Numero);
+    scanf("%f", &voti[Numero-1]);
 
     free(voti);
     voti = NULL;
