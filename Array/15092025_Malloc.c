@@ -6,12 +6,12 @@
 
 int main(){
     int *capelli;
-    int n;
+    int N;
 
-    printf("quanti clienti ci sono oggi?");
-    scanf("%d", &n);
+    printf("quanti clienti ci sono oggi? ");
+    scanf("%d", &N);
 
-    capelli=(int*)malloc(n * sizeof(int));
+    capelli=(int*)malloc(N * sizeof(int));
 
     if(capelli==NULL){
         printf("troppi clienti!");
