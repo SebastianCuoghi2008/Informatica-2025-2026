@@ -41,18 +41,21 @@ void StampaVettore(int *_vettore, int _N){
     printf("\n");
 }
 
-int* AumentaDim(int *_vettore, int _N){
-    int NuovoDim=0;
-    int *Aumenta = NULL;
+int* AumentaDim(int _n, int *_vettore){
+        int nuovaDim=0;
+        int *_Aumenta=NULL;
+        do{
+            printf("inserisci una nuova dimensione: ");
+            scanf("%d", &nuovaDim);
+            _Aumenta=(int*)realloc(_vettore, nuovaDim *sizeof(int));
+            for(int i=_n; i<nuovaDim; i++){
+                printf("inserisci nuovi valori: ");
+                scanf("%d", &_Aumenta[i]);
+            }
 
-    do{
-        printf()
-        scanf()
-        int *Aumenta = realloc(_dispari, (*_AumentaDim)*sizeof(int));
-    }
+        }while(nuovaDim!=_n);
+    return _Aumenta;
 }
-
-
 int main(){
     int *vettore = NULL;  //puntatore al vettore 
     int N;    
