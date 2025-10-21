@@ -7,20 +7,21 @@
 
 typedef char* String;
 
-void compattaSpazi(String buffer, int len){
+String compattaSpazi(String buffer, int len){
     for(int i=0; i<len; i++){
         if(buffer[i]==' '){
-            for(int j=i;j<len; j++){
-                buffer[j]=buffer[j+1];
-                len--;
-                buffer=(String)realloc(buffer, len * sizeof(char));
-                if(buffer==NULL){
-                    printf("Errore di allozione memoria\n");
-                    exit(1);
-                }
+            for(int j=i; j<len-1; j++){
+                buffer[j]=buffer[j+1];            
             }
+            len--; 
         }
     }
+    buffer=(String)realloc(buffer, (len+1) * sizeof(char));
+    if(buffer==NULL){
+        printf("Errore di allozione memoria\n");
+        exit(1);
+    }
+    return buffer;    
 }
 
 int main(){
