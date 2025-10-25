@@ -40,3 +40,8 @@ int main() {
     free(tmp);
     return 0;
 }
+
+/*
+-Cosa stampa se si inserisce “uno due tre”?
+-Qual è il ruolo di tmp e perché viene ricopiata ogni volta in parole[np]?
+*/
