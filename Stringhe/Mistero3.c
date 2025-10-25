@@ -20,3 +20,9 @@ int main() {
     free(s);
     return 0;
 }
+
+/*
+-Se si inserisce dbca, cosa stampa?
+-Qual è la logica del confronto if (*p > *(p + 1))?
+-Perché p viene incrementato a ogni iterazione?
+*/
