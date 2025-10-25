@@ -17,8 +17,8 @@ char* mistero_1(char *s, char c){
     char *str1 = s;
     char *str2 = risultato;
     int idx1 = 0, idx2 = 0;
-    while (str1[idx1] != '\0') {
-        if (str1[idx1] != c) {   
+    while(str1[idx1] != '\0'){
+        if(str1[idx1] != c){   
         str2[idx2] = str1[idx1];  
         idx2++;
         }
