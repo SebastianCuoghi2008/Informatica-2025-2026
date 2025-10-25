@@ -4,10 +4,10 @@ di lunghezza variabile all'utente.*/
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef char* String;
+typedef char* Stringa;
 
 int main(){
-    String frase = NULL;
+    Stringa frase = NULL;
     int cnt = 0;
     int capacità = 0;
     char c;
@@ -16,7 +16,7 @@ int main(){
     while(c != '\n') {
         if(cnt + 1 > capacità){
             capacità += 10;
-            frase = (String) realloc(frase, capacità * sizeof(char));
+            frase = (Stringa) realloc(frase, capacità * sizeof(char));
             if(frase == NULL){
                 printf("Ahia ahia :(");
                 return 1;
