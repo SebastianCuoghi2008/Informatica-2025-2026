@@ -11,10 +11,10 @@ int main(){
     int i=0;
     char car;
 
-    printf("inserire la stringa");
+    printf("inserire la stringa: ");
     scanf("%19['^\n']s", s);
 
-    printf("quale carattere si desidera cercare?");
+    printf("quale carattere si desidera cercare? ");
     scanf("%c", &car);
 
     while(s[i]!='\0'){
