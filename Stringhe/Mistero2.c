@@ -8,8 +8,8 @@ int main() {
     int i = 0;
     char c;
 
-    while ((c = getchar()) != '\n'){
-        if (c != ' '){
+    while((c = getchar()) != '\n'){
+        if(c != ' '){
             tmp[i++] = c;
         }else{
             tmp[i] = '\0';
