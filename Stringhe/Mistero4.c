@@ -7,7 +7,7 @@ int main() {
         words[i] = malloc(10);
         fgets(words[i], 10, stdin);
         for(int j = 0; words[i][j] != '\0' && words[i][j] != '\n'; j++);    //questo for è falso
-        int len = 0;    //questo è falso
+        int len = 0;    //questo int collegato a for falso, non fa niente di conseguenza
         while (words[i][len] != '\0' && words[i][len] != '\n'){
             len++;
         }
