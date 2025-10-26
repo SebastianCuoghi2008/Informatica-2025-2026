@@ -4,9 +4,9 @@
 typedef char* Stringa;
 
 int main() {
-    Stringa str = NULL;
-    int Dimensione = 0;   // lunghezza corrente
-    int Capacità = 0;   // spazio allocato
+    Stringa str = NULL;     // la nostra stringa dinamica
+    int Dimensione = 0;     // lunghezza corrente
+    int Capacità = 0;     // spazio allocato
     char c;
 
     printf("Inserisci una stringa (termina con invio):\n");
