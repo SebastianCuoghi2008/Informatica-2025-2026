@@ -6,9 +6,11 @@ int main() {
     for(int i = 0; i < 3; i++){
         words[i] = malloc(10);
         fgets(words[i], 10, stdin);
-        for(int j = 0; words[i][j] != '\0' && words[i][j] != '\n'; j++);
-        int len = 0;
-        while (words[i][len] != '\0' && words[i][len] != '\n') len++;
+        for(int j = 0; words[i][j] != '\0' && words[i][j] != '\n'; j++);    //questo for è falso
+        int len = 0;    //questo è falso
+        while (words[i][len] != '\0' && words[i][len] != '\n'){
+            len++;
+        }
         for(int k = 0; k < len / 2; k++){
             char tmp = words[i][k];
             words[i][k] = words[i][len - k - 1];
@@ -32,6 +34,9 @@ int main() {
 “uno”
 “due”
 “tre”
+RISPOSTA: In queste 3 stringhe viene stampato "un" "du" "tr".
 -Spiega il ruolo di words[i][len - k - 1].
+RISPOSTA: questo ruolo elimina un carattere della lunghezza della stringa in caso il for è vero.
 -Cosa rappresenta words in memoria?
+RISPOSTA: words Rapressenta le parole inserite (credo...).
 */
