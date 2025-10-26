@@ -36,7 +36,7 @@ int main() {
 “tre”
 RISPOSTA: In queste 3 stringhe viene stampato "un" "du" "tr".
 -Spiega il ruolo di words[i][len - k - 1].
-RISPOSTA: questo ruolo elimina un carattere della lunghezza della stringa in caso il for è vero.
+RISPOSTA: Questo ruolo elimina un carattere della lunghezza della stringa in caso il for è vero.
 -Cosa rappresenta words in memoria?
-RISPOSTA: words Rapressenta le parole inserite (credo...).
+RISPOSTA: words rapressenta le parole inserite (credo...).
 */
