@@ -11,7 +11,7 @@ char* mistero_1(char *s, char c){
     int len = strlen(s);
     char *risultato = malloc((len + 1) * 
     sizeof(char));
-    if (risultato == NULL){
+    if(risultato == NULL){
         return NULL;
     }
     char *str1 = s;
