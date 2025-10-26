@@ -15,8 +15,9 @@ int main() {
             tmp[i] = '\0';
             parole = realloc(parole, (np + 1) * sizeof(char *));
             parole[np] = malloc(i + 1);
-            for (int k = 0; k <= i; k++)
+            for (int k = 0; k <= i; k++){
                 parole[np][k] = tmp[k];
+            }
             np++;
             i = 0;
         }
