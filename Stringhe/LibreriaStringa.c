@@ -49,6 +49,7 @@ int calcola_lunghezza_stringa(Stringa s){
     } 
     return Dim;
 }
+
 Stringa concatena_stringhe(Stringa S1, Stringa S2, char separatore){
     int Dim1 = calcola_lunghezza_stringa(S1);
     int Dim2 = calcola_lunghezza_stringa(S2);
