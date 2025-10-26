@@ -27,5 +27,5 @@ RISPOSTA: stampa bcad.
 -Qual è la logica del confronto if (*p > *(p + 1))?
 RISPOSTA: questo if guarda se la lettera alfabetica è maggiore di quello davanti.
 -Perché p viene incrementato a ogni iterazione?
-RISPOSTA: ?
+RISPOSTA: BOH?
 */
