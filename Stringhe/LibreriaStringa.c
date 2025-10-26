@@ -42,9 +42,9 @@ Stringa crea_stringa_dinamica(char terminatore){
     return str;
 }
 
-int calcola_lunghezza_stringa(Stringa s){
+int calcola_lunghezza_stringa(Stringa S){
     int Dim=0;
-    while(s[Dim]!='\0'){
+    while(S[Dim]!='\0'){
         Dim++;
     } 
     return Dim;
