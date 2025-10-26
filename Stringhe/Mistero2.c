@@ -44,5 +44,7 @@ int main() {
 
 /*
 -Cosa stampa se si inserisce “uno due tre”?
+RISPOSTA: In questo caso stampa: "uno" "due" "tre" ovvero divide in 3 stringhe con puntatore le parole inserite in caso incontra uno spazio.
 -Qual è il ruolo di tmp e perché viene ricopiata ogni volta in parole[np]?
+RISPOSTA: BOH?
 */
