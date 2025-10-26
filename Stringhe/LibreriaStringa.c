@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void clear_buffer() {
+void clear_buffer(){
     int c;
     while ((c = getchar()) != '\n'){}
 }
