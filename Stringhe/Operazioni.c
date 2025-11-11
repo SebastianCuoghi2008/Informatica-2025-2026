@@ -41,6 +41,7 @@ int main(){
     char S3[50];
     char S4[50]= "l'";
     char S5[]="l'amore è speciale e importante nella vita";
+    char S6[]="con l'amore non sei mai solo";
 
     //lunghezza stringa
     printf("la prima stringa è lunga %zu caratteri, mentre la seconda è lunga %zu caratteri.\n", strlen(S1), strlen(S2));
@@ -68,5 +69,13 @@ int main(){
     printf("%s\n", S4);
 
     //ricerca stringa
-
+    char *posizione = strchr(S6, 'a');
+    if(posizione != NULL){
+        printf("Il carattere 'a' si trova alla posizione: %ld\n\n", posizione - S6);
+    }
+    else{
+        printf("Il carattere 'a' non è stato trovato.\n\n");
+    }
+    return 0;
 }
+
