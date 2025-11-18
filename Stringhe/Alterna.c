@@ -36,14 +36,14 @@ int main(){
     int i, j=0, len;
     Stringa s1 = (Stringa)malloc (50 * sizeof(char)); //prima stringa
 	if (s1 == NULL) return 1;
-	printf("Inserisci una stringa: ");
+	printf("Inserisci la prima stringa: ");
 	fgets(s1, 50, stdin);
     len = strlen(s1);
 	compatta(s1,len);
 	
 	Stringa s2 = (Stringa)malloc (50 * sizeof(char)); //seconda stringa
 	if (s2 == NULL) return 1;
-	printf("Inserisci una stringa: ");
+	printf("Inserisci la seconda stringa: ");
 	fgets(s2, 50, stdin);
     len = strlen(s2);
 	compatta(s2,len);
