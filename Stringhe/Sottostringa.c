@@ -3,46 +3,55 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 typedef char* Stringa;
 
-int calcola_lunghezza_stringa(Stringa S){
-    int Dim=0;
-    while(S[Dim]!='\0'){
-        Dim++;
-    } 
-    return Dim;
-}
-int stringa_in_stringa(Stringa S1, Stringa S2){
-    int Dim1 = calcola_lunghezza_stringa(S1);
-    int Dim2 = calcola_lunghezza_stringa(S2);
-    int flag = 0;
-    int cnt = 0;
+void compatta(Stringa buffer, int len){
 
-    for(int i = 0; i <= Dim1-Dim2+1; i++){
-        if(S1[i] == S2[0]){
-            flag = 1;
-            for(int j = 1; j < Dim2; j++){
-                if(S1[i+j] != S2[j]){
-                flag = 0;
-                break;
-                }
-            }
-            cnt += flag;
+        if(len>0 && buffer[len-1]=='\n'){
+            buffer[len-1] = '\0';
+            len--;
         }
-    }
-    return cnt;
 }
 
+int cerca(Stringa _str, Stringa _word){
+	int i=0, j=0, trovata=0;
+	
+	while( _str[i]!='\0' && _word[j]!='\0' && !trovata){
+		while( _str[i] == _word[j] &&  _word[j]!='\0'){
+			i+=1; j+=1;
+		}
+		
+		if ( _word[j] =='\0')
+			trovata=1;
+		else
+			trovata=0;		
+		i+=1; j=0;
+	}
+	
+	return trovata;
+}
 int main(){
-    Stringa S1 = (Stringa)malloc(50 * sizeof(char)); //prima stringa
-    if (S1 == NULL) return 1;
-    printf("Inserisci la prima stringa: ");
-    fgets(S1, 50, stdin);
-    
-    Stringa S2 = (Stringa)malloc(50 * sizeof(char)); //seconda stringa
-    if (S2 == NULL) return 1;
-    printf("Inserisci la seconda stringa: ");
-    fgets(S2, 50, stdin);
-    
-    printf("La stringa comapre %d volte in %s", stringa_in_stringa(S1, S2), S1);
+	int N, len;
+	Stringa S = (Stringa)malloc (50 * sizeof(char));
+	if (S == NULL) return 1;
+	printf("Inserisci una parola o frase: ");
+	fgets(S, 50, stdin); 
+	len = strlen(S);
+	compatta(S,len);
+	//inserisci la parola
+	Stringa parola = (Stringa)malloc(50 * sizeof(char));
+	if (parola == NULL) return 1;
+	printf("Inserisci una parola o frase: ");
+	fgets(parola, 50, stdin);
+	len = strlen(parola);
+	compatta(parola,len);
+	
+	N = cerca (S, parola);
+	if(N){
+		printf("\nParola trovata");
+    }
+	else{
+		printf("\nParola non trovata");
+    }
 }
