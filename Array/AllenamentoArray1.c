@@ -2,12 +2,9 @@
 #include <stdlib.h>
 
 int main(){
-    int *Array;
-
-    Array=(int*)malloc(sizeof(int)*11);
-    for(int i=0; i<11; i++){
-        Array[i]= 10*i;
-        if(Array[i]>0){
+    int Array[5]={1, 2, 3, 4, 5};
+    for(int i=0; i<5; i++){
+        if(Array[i]%2==1){
             printf("%d\t", Array[i]);
         }
     }
