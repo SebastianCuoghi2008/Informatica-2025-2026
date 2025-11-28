@@ -2,6 +2,7 @@
     "files.associations": {
         "stdlib.h": "c",
         "stdio.h": "c",
-        "random": "c"
+        "random": "c",
+        "array": "c"
     }
 }
