@@ -12,10 +12,8 @@ int main(){
     int NumeroX;
 
     printf("Inserisci un numero a piacere intero positivo: ");
-    if(NumeroX > 0){
-       scanf("%d", &NumeroX);
-    }
-    else{
+    scanf("%d", &NumeroX);
+    if(NumeroX < 0){
         printf("Errore, non inserire roba a caso perfavore.\n");
         return 1;
     }
