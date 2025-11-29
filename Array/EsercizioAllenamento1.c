@@ -11,39 +11,38 @@ Infine, stampa l'array lungo 12, che dovrebbe essere [ 2 , 0 , 2 , 3 , 2 , 0 , 2
 #include <stdio.h> 
 #include <stdlib.h>
 
+void StampamentoArray(int *Array){
+    for(int i=0; i<6; i++){
+        Array[i] = 0;
+        if(i % 2 == 0){
+            Array[i] = 2;
+        }
+        if(i == 3){
+            Array[i] = 3;
+        }
+        printf("%d\t", Array[i]);
+    }
+}
 int main(){
     int *Array1;
     int *Array2;
 
     Array1 = (int*)malloc(sizeof(int)*6);
-    for(int i=0; i<6; i++){
-        Array1[i] = 0;
-        if(i % 2 == 0){
-            Array1[i] = 2;
-        }
-        if(i == 3){
-            Array1[i] = 3;
-        }
-        printf("%d\t", Array1[i]);
-    }
+    StampamentoArray(Array1);
     printf("\n");
+
     Array2 = (int*)malloc(sizeof(int)*6);
-    for(int i=0; i<6; i++){
-        Array2[i] = 0;
-        if(i % 2 == 0){
-            Array2[i] = 2;
-        }
-        if(i == 3){
-            Array2[i] = 3;
-        }
-        printf("%d\t", Array2[i]);
-    }
+    StampamentoArray(Array2);
     printf("\n");
 
     Array2 = (int*)realloc(Array2, sizeof(int)*12);
-        for(int i=6; i<12; i++){
-            Array2[i] = 0;
-            printf("%d\t", Array2[i]);
-        }
+    for(int i=0; i<6; i++){
+        Array2[i+6] = Array1[i];
+    }
+    for(int i=0; i<12; i++){
+        printf("%d\t", Array2[i]);
+    }
+    free(Array1);
+
     return 0;
 }
