@@ -6,6 +6,7 @@ void clear_buffer(){
     int c;
     while ((c = getchar()) != '\n'){}
 }
+
 void CreaParola(char* Parola){
     Parola=(char*)malloc(sizeof(char)*100);
     if(Parola == NULL){
