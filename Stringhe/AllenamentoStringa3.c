@@ -21,11 +21,13 @@ int CercaSottostringa(Stringa str, Stringa frase){ //funzione che cerca una sott
 		while(str[i] == frase[j] &&  frase[j]!='\0'){
 			i+=1; j+=1;
 		}		
-		if(frase[j] =='\0')
-			trovata=1;
+		if(frase[j] =='\0'){
+            trovata=1;
+        }
 		else{
 			trovata=0;		
-		i+=1; j=0;
+	        i+=1;
+            j=0;
         }
 	}
 	return trovata;
@@ -42,12 +44,10 @@ int main(){
         printf("Errore di memoria!\n");
         exit(1);
     }
-    strcpy(str, "lavastoviglie"); 
-    printf("La stringa lavastoviglie è stata creata.\n");
     printf("Inserisci la parola o frase che è riferito alla stringa lavastoviglie: ");
     fgets(str,20,stdin);
     lunghezza=strlen(str);
-    clear_buffer();
+    str[lunghezza-1]='\0';
 
     parola=(Stringa)malloc(sizeof(char)*20); //allocazione memoria per la parola o frase
     if(parola == NULL){
@@ -57,7 +57,7 @@ int main(){
     printf("Inserisci la parola o frase che è riferito alla stringa lavastoviglie: ");
     fgets(parola,20,stdin);
     lunghezza=strlen(parola);
-    clear_buffer();
+    parola[lunghezza-1]='\0';
 
     NumeroCaratteri = CercaSottostringa(str, parola); //operazione di ricerca sottostringa
 	if(NumeroCaratteri){

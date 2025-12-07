@@ -19,10 +19,10 @@ int calcola_lunghezza_stringa(Stringa str){
     } 
     return Dim;
 }
-Stringa concatena_stringhe(Stringa S1, Stringa S2, char separatore){
+Stringa concatena_stringhe(Stringa S1, Stringa S2){
     int Dim1 = calcola_lunghezza_stringa(S1);
     int Dim2 = calcola_lunghezza_stringa(S2);
-    int Dim3 = Dim1 + Dim2 + 2;
+    int Dim3 = Dim1 + Dim2 + 1;
     Stringa S3 = (Stringa)malloc(Dim3 * sizeof(char));
 
     if(S3 == NULL){
@@ -31,9 +31,9 @@ Stringa concatena_stringhe(Stringa S1, Stringa S2, char separatore){
     }
     int i = 0;
     for(i = 0; i < Dim1; i++){
-      S3[i] = S1[i];  
+        S3[i] = S1[i];  
     }
-    S3[i] = separatore;
+    i=i-1;
 
     for(int j = 0; j < Dim2; j++){
         i++;
@@ -46,16 +46,36 @@ Stringa concatena_stringhe(Stringa S1, Stringa S2, char separatore){
 int main(){
     char Parola1[50];
     char Parola2[50];
-    Stringa Unione;
+    int lunghezza=0;
+    Stringa Unione1;
+    Stringa Unione2;
+    Stringa Controllo;
    
     printf("Inserisci la prima parola a piacere: ");
     fgets(Parola1,50,stdin);
+    lunghezza=strlen(Parola1);
+    Parola1[lunghezza-1]='\0';
 
     printf("Inserisci la seconda parola a piacere: ");
     fgets(Parola2,50,stdin);
+    lunghezza=strlen(Parola2);
+    Parola2[lunghezza-1]='\0';
 
-    Unione=concatena_stringhe(Parola1, Parola2, ' ');
-    printf("l'uione delle due parole è: %s\n",Unione);
-    free(Unione);
+    Unione1=concatena_stringhe(Parola1, Parola2);
+    printf("l'unione delle due parole è: %s\n",Unione1);
+
+    Unione2=concatena_stringhe(Parola2, Parola1);
+    printf("l'unione delle due parole è: %s\n",Unione2);
+
+    Controllo=strstr(Unione1, Parola1);
+    if(Controllo == NULL){
+        printf("la prima parola non è dentro la prima unione");
+    }
+    else{
+        printf("la prima parola è dentro la prima unione");
+    }
+
+    free(Unione1);
+    free(Unione2);
+    return 0;
 }
-  
