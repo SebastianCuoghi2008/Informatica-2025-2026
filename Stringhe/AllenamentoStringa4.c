@@ -76,6 +76,6 @@ int main(){
     }
 
     free(Unione1);
-    free(Unione2);
+    free(Unione2); 
     return 0;
 }

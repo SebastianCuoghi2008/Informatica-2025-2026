@@ -61,7 +61,7 @@ int main(){
     printf("la parola SU in questa stringa appare %d volte.\n",CercaSottostringa(parola, "su"));
 
     free(parola);
-    return 0;
+    return 0; 
 }
 
 

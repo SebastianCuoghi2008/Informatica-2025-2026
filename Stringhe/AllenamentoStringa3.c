@@ -26,7 +26,7 @@ int CercaSottostringa(Stringa str, Stringa frase){ //funzione che cerca una sott
         }
 		else{
 			trovata=0;		
-	        i+=1;
+	        i+=1; 
             j=0;
         }
 	}
