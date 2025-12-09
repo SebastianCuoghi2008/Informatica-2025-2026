@@ -62,5 +62,6 @@ int main(){
         scanf("%d", &Teams[i].mister.titoli);
         fflush(stdin);  
     }
+    Stampamento(Teams, N);
 }
     
