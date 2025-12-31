@@ -79,16 +79,16 @@ int main(){
     switch(scelta){
         case 1:
             InserimentoLibri(Libreria, N);
-            break;
+        break;
         case 2:
             StampamentoLibri(Libreria, N);
-            break;
+        break;
         case 3:
             RimuovereLibro(Libreria, &N, TitoloRimuovi);
-            break;
+        break;
         default:
             printf("scelta non valida.\n");
-            break;
+        break;
     }
 
     free(Libreria);
