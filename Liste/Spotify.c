@@ -192,11 +192,11 @@ void ricerca_canzone_artista(Lista *l, char* artista){
 
 void libera_memoria(Lista* l){
     Canzone* Attuale = l->Testa;
-    Canzone* temp;
+    Canzone* Temp;
     while(Attuale != NULL){
-        temp = Attuale;
+        Temp = Attuale;
         Attuale = Attuale->Prossimo;
-        free(temp);
+        free(Temp);
     }
     free(l);
 }
@@ -218,11 +218,11 @@ void inserisci_canzone_playlist(Lista *lista_canzoni, Lista *playlist){
                 playlist->Testa = nuova_canzone;
                 nuova_canzone->Prossimo = nuova_canzone; 
             }else{
-                Canzone* temp = playlist->Testa;
-                while(temp->Prossimo != playlist->Testa){
-                    temp = temp->Prossimo;
+                Canzone* Temp = playlist->Testa;
+                while(Temp->Prossimo != playlist->Testa){
+                    Temp = Temp->Prossimo;
                 }
-                temp->Prossimo = nuova_canzone;
+                Temp->Prossimo = nuova_canzone;
                 nuova_canzone->Prossimo = playlist->Testa; 
             }
             playlist->lunghezza++;
@@ -267,11 +267,11 @@ void cancella_canzone_playlist(Lista *playlist){
                     free(Attuale);
                     playlist->Testa = NULL;
                 }else{
-                    Canzone* temp = playlist->Testa;
-                    while (temp->Prossimo != playlist->Testa){
-                        temp = temp->Prossimo;
+                    Canzone* Temp = playlist->Testa;
+                    while (Temp->Prossimo != playlist->Testa){
+                        Temp = Temp->Prossimo;
                     }
-                    temp->Prossimo = Attuale->Prossimo;
+                    Temp->Prossimo = Attuale->Prossimo;
                     playlist->Testa = Attuale->Prossimo;
                     free(Attuale);
                 }
