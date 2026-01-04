@@ -50,11 +50,11 @@ typedef struct Canzone{
     char titolo[50];
     char artista[50];
     int durata;
-    struct Canzone* next;
+    struct Canzone* Prossimo;
 }Canzone;
 
 typedef struct Lista{
-    Canzone* testa;
+    Canzone* Testa;
     int lunghezza;
 }Lista;
 
@@ -80,7 +80,7 @@ int main(){
     Lista* lista_canzoni = crea_lista();
     Lista* playlist = crea_lista();
 
-    int scelta;
+    int Scelta;
     char artista[50];
 
     do{
@@ -93,10 +93,10 @@ int main(){
         printf("6. Cancella canzone dalla playlist\n");
         printf("0. Esci\n");
         printf("Scelta: ");
-        scanf("%d", &scelta);
+        scanf("%d", &Scelta);
         getchar(); // pulisci buffer input
 
-        switch(scelta){
+        switch(Scelta){
             case 1:
                 inserisci_canzone_lista(lista_canzoni);
                 break;
@@ -124,7 +124,7 @@ int main(){
                 printf("Scelta non valida. Riprova.\n");
         }
 
-    }while(scelta != 0);
+    }while(Scelta != 0);
 
     libera_memoria(lista_canzoni);
     libera_memoria(playlist);
@@ -154,36 +154,36 @@ void set_canzone(Canzone *c){
 
 Lista* crea_lista(){
     Lista* nuova_lista = (Lista*)malloc(sizeof(Lista));
-    nuova_lista->testa = NULL;
+    nuova_lista->Testa = NULL;
     nuova_lista->lunghezza = 0;
     return NULL; //modificare valore di ritorno
 }
 
 void stampa_lista(Lista *l){
-    Canzone* current = l->testa;
-    while(current != NULL){
-        stampa_canzone(current);
-        current = current->next;
+    Canzone* Attuale = l->Testa;
+    while(Attuale != NULL){
+        stampa_canzone(Attuale);
+        Attuale = Attuale->Prossimo;
     }
 }
 
 void inserisci_canzone_lista(Lista *l){
     Canzone* nuova_canzone = (Canzone*)malloc(sizeof(Canzone));
     set_canzone(nuova_canzone);
-    nuova_canzone->next = l->testa;
-    l->testa = nuova_canzone;
+    nuova_canzone->Prossimo = l->Testa;
+    l->Testa = nuova_canzone;
     l->lunghezza++;
 }
 
 void ricerca_canzone_artista(Lista *l, char* artista){
-    Canzone* current = l->testa;
+    Canzone* Attuale = l->Testa;
     int trovate = 0;
-    while(current != NULL){
-        if(strcmp(current->artista, artista) == 0){
-            stampa_canzone(current);
+    while(Attuale != NULL){
+        if(strcmp(Attuale->artista, artista) == 0){
+            stampa_canzone(Attuale);
             trovate++;
         }
-        current = current->next;
+        Attuale = Attuale->Prossimo;
     }
     if(trovate == 0){
         printf("Nessuna canzone trovata per l'artista: %s\n", artista);
@@ -191,11 +191,11 @@ void ricerca_canzone_artista(Lista *l, char* artista){
 }
 
 void libera_memoria(Lista* l){
-    Canzone* current = l->testa;
+    Canzone* Attuale = l->Testa;
     Canzone* temp;
-    while(current != NULL){
-        temp = current;
-        current = current->next;
+    while(Attuale != NULL){
+        temp = Attuale;
+        Attuale = Attuale->Prossimo;
         free(temp);
     }
     free(l);
@@ -207,48 +207,48 @@ void inserisci_canzone_playlist(Lista *lista_canzoni, Lista *playlist){
     scanf("%d", &id_cercato);
     getchar(); 
 
-    Canzone* current = lista_canzoni->testa;
-    while(current != NULL){
-        if(current->id == id_cercato){
+    Canzone* Attuale = lista_canzoni->Testa;
+    while(Attuale != NULL){
+        if(Attuale->id == id_cercato){
             Canzone* nuova_canzone = (Canzone*)malloc(sizeof(Canzone));
-            *nuova_canzone = *current; 
-            nuova_canzone->next = NULL;
+            *nuova_canzone = *Attuale; 
+            nuova_canzone->Prossimo = NULL;
 
-            if(playlist->testa == NULL){
-                playlist->testa = nuova_canzone;
-                nuova_canzone->next = nuova_canzone; 
+            if(playlist->Testa == NULL){
+                playlist->Testa = nuova_canzone;
+                nuova_canzone->Prossimo = nuova_canzone; 
             }else{
-                Canzone* temp = playlist->testa;
-                while(temp->next != playlist->testa){
-                    temp = temp->next;
+                Canzone* temp = playlist->Testa;
+                while(temp->Prossimo != playlist->Testa){
+                    temp = temp->Prossimo;
                 }
-                temp->next = nuova_canzone;
-                nuova_canzone->next = playlist->testa; 
+                temp->Prossimo = nuova_canzone;
+                nuova_canzone->Prossimo = playlist->Testa; 
             }
             playlist->lunghezza++;
             printf("Canzone aggiunta alla playlist.\n");
             return;
         }
-        current = current->next;
+        Attuale = Attuale->Prossimo;
     }
     printf("Canzone con ID %d non trovata nella lista delle canzoni disponibili.\n", id_cercato);
 }
 
 void stampa_playlist(Lista* playlist){
-    if(playlist->testa == NULL){
+    if(playlist->Testa == NULL){
         printf("La playlist è vuota.\n");
         return;
     }
-    Canzone* current = playlist->testa;
+    Canzone* Attuale = playlist->Testa;
     do{
-        stampa_canzone(current);
-        current = current->next;
-    }while (current != playlist->testa);
+        stampa_canzone(Attuale);
+        Attuale = Attuale->Prossimo;
+    }while (Attuale != playlist->Testa);
     
 }
 
 void cancella_canzone_playlist(Lista *playlist){
-    if(playlist->testa == NULL){
+    if(playlist->Testa == NULL){
         printf("La playlist è vuota.\n");
         return;
     }
@@ -257,35 +257,38 @@ void cancella_canzone_playlist(Lista *playlist){
     scanf("%d", &id_cercato);
     getchar(); 
 
-    Canzone* current = playlist->testa;
-    Canzone* prev = NULL;
+    Canzone* Attuale = playlist->Testa;
+    Canzone* Precedente = NULL;
 
     do{
-        if(current->id == id_cercato){
-            if(prev == NULL){ 
-                if(current->next == playlist->testa){ 
-                    free(current);
-                    playlist->testa = NULL;
+        if(Attuale->id == id_cercato){
+            if(Precedente == NULL){ 
+                if(Attuale->Prossimo == playlist->Testa){ 
+                    free(Attuale);
+                    playlist->Testa = NULL;
                 }else{
-                    Canzone* temp = playlist->testa;
-                    while (temp->next != playlist->testa){
-                        temp = temp->next;
+                    Canzone* temp = playlist->Testa;
+                    while (temp->Prossimo != playlist->Testa){
+                        temp = temp->Prossimo;
                     }
-                    temp->next = current->next;
-                    playlist->testa = current->next;
-                    free(current);
+                    temp->Prossimo = Attuale->Prossimo;
+                    playlist->Testa = Attuale->Prossimo;
+                    free(Attuale);
                 }
             }else{
-                prev->next = current->next;
-                free(current);
+                Precedente->Prossimo = Attuale->Prossimo;
+                free(Attuale);
             }
             playlist->lunghezza--;
             printf("Canzone rimossa dalla playlist.\n");
             return;
         }
-        prev = current;
-        current = current->next;
-    }while(current != playlist->testa);
+        Precedente = Attuale;
+        Attuale = Attuale->Prossimo;
+    }while(Attuale != playlist->Testa);
 
     printf("Canzone con ID %d non trovata nella playlist.\n", id_cercato);
 }
+
+//Ho voluto cambiare alcune variabili inglesi in italiano come next in prossimo, current in attuale ecc... 
+//così era più semplice per me da scrivere, leggere e assegnare
