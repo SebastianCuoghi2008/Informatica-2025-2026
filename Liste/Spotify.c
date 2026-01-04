@@ -47,15 +47,15 @@ Chiede un ID all’utente e, se presente nella playlist, lo rimuove correttament
 /* ---- Definizione struct necessarie ---- */
 typedef struct Canzone{
     int id;
-    char titolo[50];
-    char artista[50];
-    int durata;
+    char Titolo[50];
+    char Artista[50];
+    int Durata;
     struct Canzone* Prossimo;
 }Canzone;
 
 typedef struct Lista{
     Canzone* Testa;
-    int lunghezza;
+    int Lungezza;
 }Lista;
 
 /* ---- Variabile globale per gestire l'id univoco delle canzoni ---- */
@@ -78,10 +78,10 @@ void cancella_canzone_playlist(Lista *playlist);
 /* ---- MAIN ---- */
 int main(){
     Lista* lista_canzoni = crea_lista();
-    Lista* playlist = crea_lista();
+    Lista* Playlist = crea_lista();
 
     int Scelta;
-    char artista[50];
+    char Artista_[50];
 
     do{
         printf("\n===== SPOTIFY 0.0.0.1 =====\n");
@@ -105,17 +105,17 @@ int main(){
                 break;
             case 3:
                 printf("Inserisci artista da cercare: ");
-                fgets(artista, 50, stdin);
-                ricerca_canzone_artista(lista_canzoni, artista);
+                fgets(Artista_, 50, stdin);
+                ricerca_canzone_artista(lista_canzoni, Artista_);
                 break;
             case 4:
-                inserisci_canzone_playlist(lista_canzoni, playlist);
+                inserisci_canzone_playlist(lista_canzoni, Playlist);
                 break;
             case 5:
-                stampa_playlist(playlist);
+                stampa_playlist(Playlist);
                 break;
             case 6:
-                cancella_canzone_playlist(playlist);
+                cancella_canzone_playlist(Playlist);
                 break;
             case 0:
                 printf("Uscita...\n");
@@ -127,7 +127,7 @@ int main(){
     }while(Scelta != 0);
 
     libera_memoria(lista_canzoni);
-    libera_memoria(playlist);
+    libera_memoria(Playlist);
     return 0;
 }
 
@@ -136,26 +136,26 @@ int main(){
 ======================================================================================= */
 void stampa_canzone(Canzone *c){ 
     printf("ID: %d\n", c->id);
-    printf("Titolo: %s", c->titolo);
-    printf("Artista: %s", c->artista);
-    printf("Durata: %d secondi\n", c->durata);
+    printf("Titolo: %s", c->Titolo);
+    printf("Artista: %s", c->Artista);
+    printf("Durata: %d secondi\n", c->Durata);
 }
 
 void set_canzone(Canzone *c){
     c->id = id_univoco++;
     printf("Inserisci titolo della canzone: ");
-    fgets(c->titolo, 50, stdin);
+    fgets(c->Titolo, 50, stdin);
     printf("Inserisci artista della canzone: ");
-    fgets(c->artista, 50, stdin);
+    fgets(c->Artista, 50, stdin);
     printf("Inserisci durata della canzone (in secondi): ");
-    scanf("%d", &c->durata);
+    scanf("%d", &c->Durata);
     getchar(); 
 }
 
 Lista* crea_lista(){
     Lista* nuova_lista = (Lista*)malloc(sizeof(Lista));
     nuova_lista->Testa = NULL;
-    nuova_lista->lunghezza = 0;
+    nuova_lista->Lungezza = 0;
     return NULL; //modificare valore di ritorno
 }
 
@@ -172,14 +172,14 @@ void inserisci_canzone_lista(Lista *l){
     set_canzone(nuova_canzone);
     nuova_canzone->Prossimo = l->Testa;
     l->Testa = nuova_canzone;
-    l->lunghezza++;
+    l->Lungezza++;
 }
 
 void ricerca_canzone_artista(Lista *l, char* artista){
     Canzone* Attuale = l->Testa;
     int trovate = 0;
     while(Attuale != NULL){
-        if(strcmp(Attuale->artista, artista) == 0){
+        if(strcmp(Attuale->Artista, artista) == 0){
             stampa_canzone(Attuale);
             trovate++;
         }
@@ -225,7 +225,7 @@ void inserisci_canzone_playlist(Lista *lista_canzoni, Lista *playlist){
                 Temp->Prossimo = nuova_canzone;
                 nuova_canzone->Prossimo = playlist->Testa; 
             }
-            playlist->lunghezza++;
+            playlist->Lungezza++;
             printf("Canzone aggiunta alla playlist.\n");
             return;
         }
@@ -279,7 +279,7 @@ void cancella_canzone_playlist(Lista *playlist){
                 Precedente->Prossimo = Attuale->Prossimo;
                 free(Attuale);
             }
-            playlist->lunghezza--;
+            playlist->Lungezza--;
             printf("Canzone rimossa dalla playlist.\n");
             return;
         }
@@ -291,4 +291,4 @@ void cancella_canzone_playlist(Lista *playlist){
 }
 
 //Ho voluto cambiare alcune variabili inglesi in italiano come next in prossimo, current in attuale ecc... 
-//così era più semplice per me da scrivere, leggere e assegnare
+//così era più semplice per me da scrivere, leggere e assegnare.
