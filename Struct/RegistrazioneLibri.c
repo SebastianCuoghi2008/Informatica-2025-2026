@@ -34,7 +34,7 @@ int main(){
     int I_Dotato;
     float Costoso;
     int I_Costoso;
-    char Lib;
+    char Lib[40];
     int Lun;
 
     //allocazione dei primi 3 elementi
@@ -56,7 +56,7 @@ int main(){
     Libri[1].Anno = 1953;
     Libri[1].Prezzo = 13;
 
-    strcpy(Libri[2].Titolo, "Il diritto di contoare");
+    strcpy(Libri[2].Titolo, "Il diritto di contare");
     strcpy(Libri[2].Autore, "Margot Lee Schetterly");
     Libri[2].Anno = 2017;
     Libri[2].Prezzo = 18.5;
@@ -78,7 +78,7 @@ int main(){
     Libri[3].Prezzo = 9;
 
     //Visualizzaione dei dati:
-    printf("===Lista Libri===\n\n");
+    printf("\n===Lista Libri===\n\n");
     for(int i = 0; i < N; i ++){
         printf("Libro %d: \n", i + 1);
         printf("Titolo %s: \n", Libri[i].Titolo);
@@ -113,7 +113,36 @@ int main(){
 
     //ELeminazione di un libro:
     printf("Inserisci il titolo del libro da eliminare: ");
-    fgets(Lib, 50, stdin);
+    fgets(Lib, 40, stdin);
     Lun = strlen(Lib);
     Compatta(Lib, Lun);
+
+    for(int i = 0; i < N; i ++){
+        if(!(strcmp(Libri[i].Titolo, Lib))){
+            for(int j = i; j < (N - 1); j++){
+                strcpy(Libri[j].Titolo, Libri[j + 1].Titolo);
+                strcpy(Libri[j].Autore, Libri[j + 1].Autore);
+                Libri[j].Anno, Libri[j + 1].Anno;
+                Libri[j].Prezzo, Libri[j + 1].Prezzo;
+            }
+            N -= 1;
+        }
+    }
+
+    Libri = (struct Libro*)realloc(Libri, N * sizeof(struct Libro));
+
+    if(Libri == NULL){
+        printf("Errore di allocazione");
+        return 1;
+    }
+
+    printf("\n===Lista Libri===\n\n");
+    for(int i = 0; i < N; i ++){
+        printf("Libro %d: \n", i + 1);
+        printf("Titolo %s: \n", Libri[i].Titolo);
+        printf("Autore %s: \n", Libri[i].Autore);
+        printf("Titolo %d: \n", Libri[i].Anno);
+        printf("Titolo %.2f: \n\n", Libri[i].Prezzo);
+    }
+    free(Libri);
 }
