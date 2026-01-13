@@ -83,8 +83,8 @@ int main(){
         printf("Libro %d: \n", i + 1);
         printf("Titolo %s: \n", Libri[i].Titolo);
         printf("Autore %s: \n", Libri[i].Autore);
-        printf("Titolo %d: \n", Libri[i].Anno);
-        printf("Titolo %.2f: \n\n", Libri[i].Prezzo);
+        printf("Anno %d: \n", Libri[i].Anno);
+        printf("Prezzo %.2f: \n\n", Libri[i].Prezzo);
     }
 
     //Ricerca del libro più dotato:
@@ -141,8 +141,8 @@ int main(){
         printf("Libro %d: \n", i + 1);
         printf("Titolo %s: \n", Libri[i].Titolo);
         printf("Autore %s: \n", Libri[i].Autore);
-        printf("Titolo %d: \n", Libri[i].Anno);
-        printf("Titolo %.2f: \n\n", Libri[i].Prezzo);
+        printf("Anno %d: \n", Libri[i].Anno);
+        printf("Prezzo %.2f: \n\n", Libri[i].Prezzo);
     }
     free(Libri);
 }
