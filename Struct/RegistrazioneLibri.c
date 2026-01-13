@@ -11,86 +11,109 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct{
-    char Titolo[40];
-    char Autore[30];
-    int AnnoPubblicazione;
-}Libro;
+typedef char* Stringa;
 
-void InserimentoLibri(Libro *Libreria, int N){
-    for(int i=0; i<N; i++){
-        printf("inserisci il titolo del libro: ");
-        scanf("%s", Libreria[i].Titolo);
-        fflush(stdin);
-        printf("inserisci l'autore del libro: ");
-        scanf("%s", Libreria[i].Autore);
-        fflush(stdin);
-        printf("inserisci l'anno di pubblicazione del libro: ");
-        scanf("%d", &Libreria[i].AnnoPubblicazione);
-        fflush(stdin);    
-    }
-}
-void StampamentoLibri(Libro *Libreria, int N){
-    for(int i=0; i<N; i++){
-        printf("Titolo libro: %s\n", Libreria[i].Titolo);
-        printf("Autore libro: %s\n", Libreria[i].Autore);
-        printf("Anno pubblicazione libro: %d\n", Libreria[i].AnnoPubblicazione);
-    }
-}
-void RimuovereLibro(Libro *Libreria, int *N, char TitoloRimuovi[]){
-    int trovato = 0;
-    for(int i=0; i<*N; i++){
-        if(strcmp(Libreria[i].Titolo, TitoloRimuovi) == 0){
-            trovato = 1;
-            for(int j=i; j<*N-1; j++){
-                Libreria[j] = Libreria[j+1];
-            }
-            (*N)--;
-            break;
-        }
-    }
-    if(!trovato){
-        printf("Libro non trovato.\n");
+struct Libro{
+    char Titolo[40];
+    char Autore[20];
+    int Anno;
+    float Prezzo;
+};
+
+void Compatta(Stringa Buffer, int Lunghezza){
+    if(Lunghezza > 0 && Buffer[Lunghezza - 1] == '\n'){
+        Buffer[Lunghezza - 1] = '\n';
+        Lunghezza --;
     }
 }
 
 int main(){
-    Libro *Libreria;
-    int N=0;
-    int scelta=0;
-    char TitoloRimuovi[40];
+    struct Libro *Libri;
+    int N = 3;
+    int Dotato;
+    int I_Dotato;
+    float Costoso;
+    int I_Costoso;
+    char Lib;
+    int Lun;
 
-    do{
-        printf("inserisci il numero dei libri da registrare(masiimo 15): ");
-        scanf("%d", &N);
-    }while(N<0 || N>15);
+    //allocazione dei primi 3 elementi
+    Libri = (struct Libro*)malloc(N * sizeof(struct Libro));
 
-    Libreria=(Libro*)malloc(N*sizeof(Libro));
-    if(Libreria == NULL){
-        printf("Errore durante l'allocazione");
-        exit(1);
+    if(Libri == NULL){
+        printf("Errore di allocazione");
+        return 1;
     }
 
-    printf("Scegli un'opzione:\n");
-    printf("1. Inserire libri\n");
-    printf("2. Stampare libri\n");
-    printf("3. Rimuovere un libro\n");
-    scanf("%d", &scelta);
-    switch(scelta){
-        case 1:
-            InserimentoLibri(Libreria, N);
-        break;
-        case 2:
-            StampamentoLibri(Libreria, N);
-        break;
-        case 3:
-            RimuovereLibro(Libreria, &N, TitoloRimuovi);
-        break;
-        default:
-            printf("scelta non valida.\n");
-        break;
+    //inserimento dei dati:
+    strcpy(Libri[0].Titolo, "l'amore mio non muore");
+    strcpy(Libri[0].Autore, "Roberto Saviano");
+    Libri[0].Anno = 2025;
+    Libri[0].Prezzo = 19.50;
+
+    strcpy(Libri[1].Titolo, "Maledetti di Dio");
+    strcpy(Libri[1].Autore, "Sven Assel");
+    Libri[1].Anno = 1953;
+    Libri[1].Prezzo = 13;
+
+    strcpy(Libri[2].Titolo, "Il diritto di contoare");
+    strcpy(Libri[2].Autore, "Margot Lee Schetterly");
+    Libri[2].Anno = 2017;
+    Libri[2].Prezzo = 18.5;
+
+    //Realloc per aggiungere uno o più libri:
+
+    N += 1;
+
+    Libri = (struct Libro*)realloc(Libri, N * sizeof(struct Libro));
+
+    if(Libri == NULL){
+        printf("Errore di allocazione");
+        return 1;
     }
 
-    free(Libreria);
-    return 0;
+    strcpy(Libri[3].Titolo, "Orgoglio e pregiudizio");
+    strcpy(Libri[3].Autore, "Jane Austen");
+    Libri[3].Anno = 1813;
+    Libri[3].Prezzo = 9;
+
+    //Visualizzaione dei dati:
+    printf("===Lista Libri===\n\n");
+    for(int i = 0; i < N; i ++){
+        printf("Libro %d: \n", i + 1);
+        printf("Titolo %s: \n", Libri[i].Titolo);
+        printf("Autore %s: \n", Libri[i].Autore);
+        printf("Titolo %d: \n", Libri[i].Anno);
+        printf("Titolo %.2f: \n\n", Libri[i].Prezzo);
+    }
+
+    //Ricerca del libro più dotato:
+    Dotato = Libri[0].Anno;
+    I_Dotato = 0;
+    
+    for(int i = 1; i < N; i ++){
+        if(Libri[i].Anno < Dotato){
+            Dotato = Libri[i].Anno;
+            I_Dotato = i;
+        }
+    }
+    printf("Il libro piu dotato e': %s\n", Libri[I_Dotato].Titolo);
+
+    //Ricerca del libro più costoso:
+    Costoso = Libri[0].Prezzo;
+    I_Costoso = 0;
+    
+    for(int i = 1; i < N; i ++){
+        if(Libri[i].Prezzo > Costoso){
+            Costoso = Libri[i].Prezzo;
+            I_Costoso = i;
+        }
+    }
+    printf("Il libro piu costoso e': %s\n", Libri[I_Costoso].Titolo);
+
+    //ELeminazione di un libro:
+    printf("Inserisci il titolo del libro da eliminare: ");
+    fgets(Lib, 50, stdin);
+    Lun = strlen(Lib);
+    Compatta(Lib, Lun);
 }
