@@ -4,96 +4,125 @@ per ogni studente dotato di matricola, abbiamo le informazioni riguardante gli e
 1) Ricercare lo studente con più certificazioni.
 */
 
-typedef struct{
-    char Cognome[20];
-    char Nome[20];
-    char Classe[3];
-    int Matricola;      //1000 - 99999
-}Studente;
-
-typedef struct{
-    int Matricola;
-    struct esame{
-        char corso[20];
-        int livello;    //(1 - 3)
-    };
-}Certificazione;
-
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include <stdlib.h>
 
-void InserimentoStudenti(Studente *Registro, int N){
-    for(int i=0; i<N; i++){
-        printf("inserisci il cognome dello studente: ");
-        scanf("%s", Registro[i].Cognome);
-        fflush(stdin);
-        printf("inserisci il nome dello studente: ");
-        scanf("%s", Registro[i].Nome);
-        fflush(stdin);
-        printf("inserisci la classe dello studente: ");
-        scanf("%s", Registro[i].Classe);
-        fflush(stdin);
-        do{
-            printf("inserisci la matricola dello studente: ");
-            scanf("%d", &Registro[i].Matricola);
-            fflush(stdin);    
-        }while(Registro[i].Matricola < 1000 || Registro[i].Matricola > 99999);
-    }
-}
+struct Studente{
+	char Cognome[20];
+	char Nome[20];
+	char classe[3];
+	int matricola;
+	int n_certif;
+};
 
-void StampamentoStudenti(Studente *Registro, int N){
-    for(int i=0; i<N; i++){
-        printf("Cognome studente: %s\n", Registro[i].Cognome);
-        printf("Nome studente: %s\n", Registro[i].Nome);
-        printf("Classe studente: %s\n", Registro[i].Classe);
-        printf("Matricola studente: %d\n", Registro[i].Matricola);
-    }
-}
-
-void Ricerca_Studente_Certificazioni(Studente *Registro, Certificazione *Certificati, int N_Studenti, int N_Certificati){
-    int max_certificati = 0;
-    int matricola_max = -1;
-
-    for(int i=0; i<N_Studenti; i++){
-        int count = 0;
-        for(int j=0; j<N_Certificati; j++){
-            if(Registro[i].Matricola == Certificati[j].Matricola){
-                count++;
-            }
-        }
-        if(count > max_certificati){
-            max_certificati = count;
-            matricola_max = Registro[i].Matricola;
-        }
-    }
-
-    if(matricola_max != -1){
-        printf("Lo studente con più certificazioni ha la matricola: %d con %d certificazioni.\n", matricola_max, max_certificati);
-    } else {
-        printf("Nessuno studente ha certificazioni.\n");
-    }
-}
+struct Certificazione{
+	int matricola;
+	struct esame{
+		char corso[20];
+		int livello;
+	}esame;
+};
 
 int main(){
-    Studente *Registro;
-    int N;
-
-    do{
-        printf("inserisci il numero degli studenti(max 50): ");
-        scanf("%d", &N);
-    }while(N<0 || N>50);
-
-    Registro=(Studente*)malloc(N*sizeof(Studente));
-    if(Registro == NULL){
-        printf("Errore durante l'allocazione");
-        exit(1);
+	struct Studente *studenti;
+	struct Certificazione *certificazioni;
+	int n, i, j, c_max=0, num=0, i_max;
+	
+	//Allochiamo i primi 2 studenti 
+	n = 3;
+	studenti = (struct Studente*)malloc(n * sizeof(struct Studente));
+    certificazioni = (struct Certificazione*)malloc(n * sizeof (struct Certificazione));
+    if (studenti == NULL) {
+        printf("Errore: allocazione memoria fallita\n");
+        return 1;
+    }
+	if (certificazioni == NULL) {
+        printf("Errore: allocazione memoria fallita\n");
+        return 1;
     }
 
-    InserimentoStudenti(Registro, N);
-    StampamentoStudenti(Registro, N);
-    Ricerca_Studente_Certificazioni(Registro, NULL, N, 0);
-
-    free(Registro);
-    return 0;
+    //inseriamo gli elementi e stampiamoli
+    strcpy(studenti[0].Cognome, "Rossi");
+	strcpy(studenti[0].Nome, "Giulio");
+	strcpy(studenti[0].classe, "4I");
+	studenti[0].matricola = 123;  
+	studenti[0].n_certif = 0;  
+	
+	strcpy(studenti[1].Cognome, "Verdi");
+	strcpy(studenti[1].Nome, "Carlo");
+	strcpy(studenti[1].classe, "3I");
+	studenti[1].matricola = 456;  
+	studenti[1].n_certif = 0; 
+	
+	strcpy(studenti[2].Cognome, "Gialli");
+	strcpy(studenti[2].Nome, "Sofia");
+	strcpy(studenti[2].classe, "4I");
+	studenti[2].matricola = 789;
+	studenti[2].n_certif = 0; 
+	 
+	//adesso inseriamo in base alle matricole i corsi e il livello
+	certificazioni[0].matricola = 123;
+	strcpy(certificazioni[0].esame.corso,"inglese");
+	certificazioni[0].esame.livello = 3;
+	
+	certificazioni[1].matricola = 123;
+	strcpy(certificazioni[1].esame.corso,"tedesco");
+	certificazioni[1].esame.livello = 1; 
+	
+	certificazioni[2].matricola = 789;
+	strcpy(certificazioni[2].esame.corso,"spagnolo");
+	certificazioni[2].esame.livello = 1;  
+	
+	//visualizziamo gli studenti
+	printf("=== Lista Studenti ===\n");
+    for (i = 0; i < n; i++) {
+        printf("Studente %d:\n", i + 1);
+        printf("  Cognome: %s\n", studenti[i].Cognome);
+        printf("  Nome: %s\n", studenti[i].Nome);
+        printf("  Classe: %s\n", studenti[i].classe);
+        printf("  Matricola:  %d\n", studenti[i].matricola);
+        printf("  Numero Certificazioni:  %d\n\n", studenti[i].n_certif);
+    }
+    //visualizziamo le certificazioni relative alle matricole
+	printf("=== Lista Certificazioni ===\n");
+    for (i = 0; i < n; i++) {
+        printf("  Matricola: %d\n", certificazioni[i].matricola);
+        printf("  Corso: %s\n", certificazioni[i].esame.corso);
+        printf("  Livello: %d\n\n", certificazioni[i].esame.livello);
+    }
+    
+    //calcoliamo il numero delle certificazioni di ogni studente
+    for(i=0; i<n; i++){
+    	num = studenti[i].matricola;
+    	for(j=0; j<n; j++){
+    		if(certificazioni[j].matricola == num){
+    			studenti[i].n_certif +=1;
+			}
+		}
+	}
+	
+	//visualizziamo gli studenti
+	printf("=== Lista Studenti ===\n");
+    for (i = 0; i < n; i++) {
+        printf("Studente %d:\n", i + 1);
+        printf("  Cognome: %s\n", studenti[i].Cognome);
+        printf("  Nome: %s\n", studenti[i].Nome);
+        printf("  Classe: %s\n", studenti[i].classe);
+        printf("  Matricola:  %d\n", studenti[i].matricola);
+        printf("  Numero Certificazioni:  %d\n\n", studenti[i].n_certif);
+    }
+	
+	//calcoliamo lo studente con pių certificazioni
+	c_max = studenti[0].n_certif;
+	i_max = 0;
+	for(i=0; i<n; i++){
+    		if(studenti[i].n_certif > c_max){
+    			c_max = studenti[i].n_certif;
+    			i_max = i;
+			}
+	}	
+	printf("Lo studente con piu\' certificazioni e\': %s, %s, %s, matricola: %d",studenti[i_max].Cognome , studenti[i_max].Nome, studenti[i_max].classe, studenti[i_max].matricola);
+	free(studenti);
+	free(certificazioni);
 }
