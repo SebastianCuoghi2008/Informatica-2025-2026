@@ -62,7 +62,6 @@ int main(){
     Libri[2].Prezzo = 18.5;
 
     //Realloc per aggiungere uno o più libri:
-
     N += 1;
 
     Libri = (struct Libro*)realloc(Libri, N * sizeof(struct Libro));
@@ -81,10 +80,10 @@ int main(){
     printf("\n===Lista Libri===\n\n");
     for(int i = 0; i < N; i ++){
         printf("Libro %d: \n", i + 1);
-        printf("Titolo %s: \n", Libri[i].Titolo);
-        printf("Autore %s: \n", Libri[i].Autore);
-        printf("Anno %d: \n", Libri[i].Anno);
-        printf("Prezzo %.2f: \n\n", Libri[i].Prezzo);
+        printf("Titolo: %s \n", Libri[i].Titolo);
+        printf("Autore: %s \n", Libri[i].Autore);
+        printf("Anno: %d \n", Libri[i].Anno);
+        printf("Prezzo: %.2f \n\n", Libri[i].Prezzo);
     }
 
     //Ricerca del libro più dotato:
