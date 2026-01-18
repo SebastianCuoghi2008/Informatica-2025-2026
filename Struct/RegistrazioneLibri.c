@@ -76,7 +76,7 @@ int main(){
     Libri[3].Anno = 1813;
     Libri[3].Prezzo = 9;
 
-    //Visualizzaione dei dati:
+    //Visualizzaione dei dati aggiornati:
     printf("\n===Lista Libri===\n\n");
     for(int i = 0; i < N; i ++){
         printf("Libro %d: \n", i + 1);
@@ -114,6 +114,7 @@ int main(){
     printf("Inserisci il titolo del libro da eliminare: ");
     fgets(Lib, 40, stdin);
     Lun = strlen(Lib);
+    Lib[Lun - 1] = '\0';
     Compatta(Lib, Lun);
 
     for(int i = 0; i < N; i ++){
