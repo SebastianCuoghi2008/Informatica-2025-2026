@@ -98,5 +98,20 @@ int main(){
         printf("Profondità: %dcm \n", Tavoli[i].Profondità);
         printf("Larghezza: %dcm \n\n", Tavoli[i].Larghezza);
     }
+
+    for(int i = 0; i < N-1; i++){
+        if(Tavoli[i].Altezza == Tavoli[3].Altezza){
+            printf("L'altezza di questo tavolo è uguale %d.", i);
+        }
+        if(Tavoli[i].Profondità == Tavoli[3].Profondità){
+            printf("La profondità di questo tavolo è uguale %d.", i);
+        }
+        if(Tavoli[i].Larghezza == Tavoli[3].Larghezza){
+            printf("La larghezza di questo tavolo è uguale %d.", i);
+        }
+        //if(Tavoli[i].Larghezza == Tavoli[3].Larghezza && Tavoli[i].Profondità == Tavoli[3].Profondità && Tavoli[i].Altezza == Tavoli[3].Altezza){
+            //printf("La larghezza di questo tavolo è uguale %d.", i);
+        //}
+    }
     free(Tavoli);
 }
