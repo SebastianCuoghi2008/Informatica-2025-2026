@@ -22,7 +22,7 @@ struct Libro{
 
 void Compatta(Stringa Buffer, int Lunghezza){
     if(Lunghezza > 0 && Buffer[Lunghezza - 1] == '\n'){
-        Buffer[Lunghezza - 1] = '\n';
+        Buffer[Lunghezza - 1] = '\0';
         Lunghezza --;
     }
 }
@@ -114,7 +114,6 @@ int main(){
     printf("Inserisci il titolo del libro da eliminare: ");
     fgets(Lib, 40, stdin);
     Lun = strlen(Lib);
-    Lib[Lun - 1] = '\0';
     Compatta(Lib, Lun);
 
     for(int i = 0; i < N; i ++){
