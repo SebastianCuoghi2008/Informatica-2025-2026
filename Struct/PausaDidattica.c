@@ -54,6 +54,7 @@ void Stampamento_Prodotto(Prodotto* prodotto, int N){
 }
 
 void Cercare_prodotto(Prodotto* prodotto, int N){
+    
     int Codice = 0;
     int Trovato = 0;
 
@@ -62,9 +63,23 @@ void Cercare_prodotto(Prodotto* prodotto, int N){
 
     for(int i = 0; i < N; i++){
         if(Codice == prodotto[i].Codice){
+            Trovato = 1;
+            printf("Il prodotto e': %s", prodotto[i].Nome);
         }
     }
+    if(Trovato == 0){
+        printf("Prodotto non trovato\n");
+    }
+}
 
+void Calcolare_valore_totale(Prodotto* prodotto, int N){
+
+    float Valore_totale = 0;
+
+    for(int i = 0; i < N; i++){
+        Valore_totale += prodotto[i].Quantita * prodotto[i].Prezzo;
+    }
+    printf("Il valore totale del magazzino e': %.2f Euro\n", Valore_totale);
 }
 
 int main(){
@@ -96,10 +111,10 @@ int main(){
                 Stampamento_Prodotto(Magazzino, N);
                 break;
             case 3:
-                (Magazzino, N);
+                Cercare_prodotto(Magazzino, N);
                 break;
             case 4:
-                (Magazzino, N);
+                Calcolare_valore_totale(Magazzino, N);
                 break;
             default:
                 printf("\nScelta non valida!");
