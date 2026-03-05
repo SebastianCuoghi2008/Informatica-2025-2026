@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int main(){
-    FILE *pFile = fopen("Dati.txt", "w");
+    FILE *pFile = fopen("Output.txt", "w");
 
     if(pFile == NULL){
         printf("Errore di apertura!\n");
