@@ -20,9 +20,10 @@ void Aggiungo_contatto(){
 
     printf("Inserisci il nome: ");
     scanf("%[^n]", C.Nome);
+    getchar();
     printf("Inserisci il numero telefono: ");
-    scanf("%[^n]", C.Telefono);
-
+    scanf(" %[^n]", C.Telefono);
+    getchar();
     fwrite(&C, sizeof(Contatto), 1, pFile);
 
     fclose(pFile);
