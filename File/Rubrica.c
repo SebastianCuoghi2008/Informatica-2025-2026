@@ -57,6 +57,7 @@ void Stampa_contatti(){
 }
 
 void Elimina_contatto(){
+
     FILE *pFile = fopen("Rubriche.dat", "rb");
     FILE *pFile_tmp = fopen("Tmp.dat", "wb");
     char Cerca[30];
@@ -102,6 +103,7 @@ void Elimina_contatto(){
 }
 
 void Separa_contatti(){
+
     FILE *pFile = fopen("Rubriche.dat", "rb");
     FILE *pFile_F = fopen("Femmine.dat", "wb");
     FILE *pFile_M = fopen("Maschi.dat", "wb");
@@ -152,6 +154,7 @@ void Separa_contatti(){
 }
 
 int main(){
+    
     int Scelta;
 
     do{
@@ -184,4 +187,6 @@ int main(){
                 printf("Scelta non valida\n");
         }      
     }while(Scelta != 0);
+
+    return 0;
 }
