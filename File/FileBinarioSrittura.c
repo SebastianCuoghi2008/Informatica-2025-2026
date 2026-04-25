@@ -4,7 +4,7 @@
 
 int main(){
 
-    FILE *pFile = fopen("Numeri.bin", "wb");
+    FILE *pFile = fopen("Numeri-W.bin", "wb");
     int Numeri[3] = {10, 20, 30};
 
     if(pFile == NULL){

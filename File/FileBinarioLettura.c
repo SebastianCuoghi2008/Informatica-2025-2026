@@ -4,7 +4,7 @@
 
 int main(){
 
-    FILE *pFile = fopen("Numeri.bin", "rb");
+    FILE *pFile = fopen("Numeri-R.bin", "rb");
     int Numeri[3];
 
     if(pFile == NULL){
