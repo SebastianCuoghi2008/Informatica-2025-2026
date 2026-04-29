@@ -76,6 +76,7 @@ void Stampa_libri(){
 void Ricerca_libro(){
 
     FILE *pFile = fopen("Biblioteca.bin", "rb");
+    char Cerca[30];
 
     if(pFile == NULL){
         printf("Errore nella apertura del file\n");
@@ -84,15 +85,99 @@ void Ricerca_libro(){
 
     Libro libro;
 
+    printf("Inserisci il titolo del libro da cercare: ");
+    scanf(" %[^\n]", Cerca);
+    getchar();
+
+    while(fread(&libro, sizeof(Libro), 1, pFile)){
+        if(strcmp(libro.Titolo, Cerca) == 0){
+            printf("Libro trovato!\n");
+            printf("Autore: %s, Titolo %s, ISBN: %s, Anno: %d\n", libro.Autore, libro.Titolo, libro.ISBN, libro.Anno);
+            printf("\n");
+        }
+    }
+
+    if(strcmp(libro.Titolo, Cerca) != 0){
+        printf("Libro non trovato\n");
+    }
+
     fclose(pFile);
 }
 
 void Cancellazione_libro(){
 
+    FILE *pFile = fopen("Biblioteca.bin", "rb");
+    FILE *pFile_tmp = fopen("Tmp.bin", "wb");
+    char Cerca[30];
+
+    if(pFile == NULL){
+        printf("Errore nella apertura del file\n");
+        return;
+    }
+    if(pFile_tmp == NULL){
+        printf("Errore nella apertura del file temopraneo\n");
+        return;
+    }
+
+    Libro libro;
+
+    printf("Inserisci il titolo del libro da eliminare: ");
+    scanf(" %[^\n]", Cerca);
+    getchar();
+
+    while(fread(&libro, sizeof(Libro), 1, pFile)){
+        if(strcmp(libro.Titolo, Cerca) == 0){
+            printf("Trovato!\n");
+            printf("Il libro sara' eliminato ");
+            printf("\n");
+        }
+        else{
+            fwrite(&libro, sizeof(Libro), 1, pFile_tmp);
+        }
+    }
+
+    fclose(pFile);
+    fclose(pFile_tmp);
+
+    pFile = fopen("Tmp.dat", "rb");
+    pFile_tmp = fopen("Biblioteca.bin", "wb");
+
+    while(fread(&libro, sizeof(Libro), 1, pFile)){
+        fwrite(&libro, sizeof(Libro), 1, pFile_tmp);
+    }
+
+    fclose(pFile);
+    fclose(pFile_tmp);
 }
 
 void Modificazione_libro(){
+    FILE *pFile = fopen("Biblioteca.bin", "rb+");
+    char Modifica_ISBN[30];
+    int Trovato = 0;
 
+    if(pFile == NULL){
+        printf("Errore nella apertura del file\n");
+        return;
+    }
+
+    Libro libro;
+
+    printf("Inserisci il ISBN del libro da modificare: ");
+    scanf(" %[^\n]", Modifica_ISBN);
+    getchar();
+    while(fread(&libro, sizeof(Libro), 1, pFile)){
+        if(strcmp(libro.ISBN, Modifica_ISBN) == 0){
+            printf("Trovato!\n");
+            printf("Inserisci il nuovo ISBN: ");
+            scanf(" %[^\n]", libro.ISBN);
+            getchar();
+
+            fseek(pFile, - sizeof(Libro), SEEK_CUR);
+
+            fwrite(&libro, sizeof(Libro), 1, pFile);
+            Trovato = 1;
+        }
+    }
 }
 
 void Separazione_specifica(){
