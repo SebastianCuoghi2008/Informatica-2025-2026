@@ -182,6 +182,52 @@ void Modificazione_libro(){
 
 void Separazione_specifica(){
 
+    FILE *pFile = fopen("Biblioteca.bin", "rb");
+    FILE *pFile_pre2000 = fopen("Libri_pre2000.bin", "wb");
+    FILE *pFile_post2000 = fopen("Libri_post2000.bin", "wb");
+
+    if(pFile == NULL){
+        printf("Errore nella apertura del file\n");
+        return;
+    }
+    if(pFile_pre2000 == NULL){
+        printf("Errore nella apertura del file pre 2000\n");
+        return;
+    }
+    if(pFile_post2000 == NULL){
+        printf("Errore nella apertura del file post 2000\n");
+        return;
+    }
+
+    Libro libro;
+
+    while(fread(&libro, sizeof(Libro), 1, pFile)){
+        if(libro.Anno < 2000){
+            fwrite(&libro, sizeof(Libro), 1, pFile_pre2000);
+        }
+        else{
+            fwrite(&libro, sizeof(Libro), 1, pFile_post2000);
+        }
+    }
+
+    fclose(pFile);
+    fclose(pFile_pre2000);
+    fclose(pFile_post2000);
+
+    pFile_pre2000 = fopen("Libri_pre2000.bin", "rb");
+    pFile_post2000 = fopen("Libri_post2000.bin", "rb");
+
+    printf("\n -----Libri creati prima del 2000-----\n");
+    while(fread(&libro, sizeof(Libro), 1, pFile_pre2000)){
+        printf("Autore: %s, Titolo %s, ISBN: %s, Anno: %d\n", libro.Autore, libro.Titolo, libro.ISBN, libro.Anno);
+    }
+    printf("\n -----Libri creati dopo il 2000-----\n");
+    while(fread(&libro, sizeof(Libro), 1, pFile_post2000)){
+        printf("Autore: %s, Titolo %s, ISBN: %s, Anno: %d\n", libro.Autore, libro.Titolo, libro.ISBN, libro.Anno);
+    }
+
+    fclose(pFile_pre2000);
+    fclose(pFile_post2000);
 }
 
 int main(){
