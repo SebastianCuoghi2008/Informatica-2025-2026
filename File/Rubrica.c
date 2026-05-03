@@ -130,6 +130,10 @@ void Separa_contatti(){
         else if(C.Sesso == 'm' || C.Sesso == 'M'){
             fwrite(&C, sizeof(Contatto), 1, pFile_M);
         }
+        else{
+            printf("Carattere non valido!\n");
+            return;
+        }
     }
 
     fclose(pFile);
