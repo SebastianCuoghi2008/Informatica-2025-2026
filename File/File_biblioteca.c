@@ -165,6 +165,7 @@ void Modificazione_libro(){
     printf("Inserisci il ISBN del libro da modificare: ");
     scanf(" %[^\n]", Modifica_ISBN);
     getchar();
+
     while(fread(&libro, sizeof(Libro), 1, pFile)){
         if(strcmp(libro.ISBN, Modifica_ISBN) == 0){
             printf("Trovato!\n");
@@ -177,6 +178,9 @@ void Modificazione_libro(){
             fwrite(&libro, sizeof(Libro), 1, pFile);
             Trovato = 1;
         }
+    }
+    if(!Trovato){
+        printf("\nProdotto non trovato");
     }
 }
 
@@ -273,4 +277,5 @@ int main(){
         }      
     }while(Scelta != 0);
 
+    return 0;
 }
